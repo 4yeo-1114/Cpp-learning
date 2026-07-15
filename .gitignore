@@ -1,0 +1,29 @@
+# 编译产物
+*.exe
+*.obj
+*.o
+*.ilk
+*.pdb
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.sln
+*.vcxproj
+*.vcxproj.filters
+x64/
+Debug/
+Release/
+
+# VS Code (保留 settings 文件)
+.vscode/settings.json
+
+# 系统文件
+Thumbs.db
+Desktop.ini
+
+# Claude Code（保留 CLAUDE.md 和 skills）
+.claude/settings.local.json
+.claude/worktrees/
+.claude/scheduled_tasks.json
