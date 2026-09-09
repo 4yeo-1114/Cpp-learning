@@ -27,3 +27,6 @@ Desktop.ini
 .claude/settings.local.json
 .claude/worktrees/
 .claude/scheduled_tasks.json
+
+# Local build output
+/build/
