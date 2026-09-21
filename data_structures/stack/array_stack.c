@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//没有头节点的写法
 // 链栈节点结构定义
 typedef struct StackNode {
     int data;               // 节点数据域

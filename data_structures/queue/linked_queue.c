@@ -47,7 +47,7 @@ int DeQueue(LinkQueue *q, int * value){
 	Node * temp = q->front->next; 
 	q->front->next =temp->next;
 	*value = temp->data;
-	if(temp == q->rear){ // 若出队后队列为空
+	if(temp == q->rear){ // 若出队后队列为空 这一步是必要的 因为你后面要把temp free
 	  q->rear = q->front; 
 	}
 	free(temp);
