@@ -15,3 +15,5 @@ int pop(Stack *s){
 	}
 	return -1; 
 }
+
+//用数组实现栈
