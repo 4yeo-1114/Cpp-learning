@@ -1,88 +1,53 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+//反转链表 
 typedef struct Node{
-    int data;
-    struct Node * next;
-}Node;
+	int val;
+	struct Node *next;
+}node;
 
-Node* creatHead(){
-    Node* head  =(Node*)malloc(sizeof(Node));
-    if(head==NULL){
-        printf("内存表分配失败！");
-        exit(1);
-    }
-    head->next = NULL;
-    return head;
-}
 
-//头插法
-void headInsert(Node *head,int n){
-    for(int i  = 0 ;i<n;i++){
-        Node* newNode = (Node*)malloc(sizeof(Node));
-        if(newNode==NULL){
-            printf("内存分配失败！");
-            exit(1);
+void reverse(node * head){
+    node *now = head->next;
+    node * pre = NULL;
+    while(now){
+        if(now->next==NULL){
+            head->next = now;
+            now->next = pre;
+            break;
         }
-        printf("第%d次输入",i+1);
-        scanf("%d",&newNode->data);
-        newNode->next =  head->next;
-        head->next = newNode;
-    }
-
-}
-
-void tailInsert(Node*head,int n){
-    Node * tail = head;
-    for(int i = 0;i<n;i++){
-        Node * newNode = (Node*)malloc(sizeof(Node));
-        if(newNode==NULL){
-            printf("内存分配失败！");
-            exit(1);
-        }
-        printf("第%d次输入",i+1);
-        scanf("%d",&newNode->data);
-        newNode->next = NULL;
-        tail->next = newNode;
-        tail  = newNode;
+        //先存nxt 再改now
+        node* nxt = now->next;
+        now->next = pre;
+        pre = now;
+        now = nxt;
     }
 }
 
+//反转从left到right
+void reversei(node *head,int left,int right){
+    if (!head || left >= right) return;
 
-void PrintList(Node *head){
-    Node*p = head->next;
-    while(p != NULL){
-        printf("%d",p->data);
-        p = p ->next;
+    node*Lpre = head;
+    node*Lnow = head->next;
+    while(--left){
+        Lpre = Lnow;
+        Lnow =Lnow->next;
+        right -- ; 
     }
-    printf("\n");
-}
+    //循环出来得到的right就相当于反转次数了
+    
+    node *Rpre =NULL;
+    node *Rnow  = Lnow;
+    node* nxt = NULL;
+    while(--right){
+        nxt = Rnow->next;
+        Rnow->next =Rpre;
+        Rpre = Rnow;
+        Rnow = nxt;
 
-
-void DestroyList(Node *head){
-    Node *p = head;
-    while(p!=NULL){
-        Node * temp  = p ->next;
-        free(p);
-        p = temp;
     }
-}
+    Lpre->next =Rpre;
+    Lnow->next = Rnow;
 
-int main(){
-	Node* head1 = creatHead();
-	Node* head2 = creatHead();
-	int n;
-	printf("请输入要插入元素的个数:");
-	scanf("%d", &n);
-	headInsert(head1, n);
-	printf("头插法结果：");
-	PrintList(head1);
-	
-	tailInsert(head2,n);
-	printf("尾插法结果：");
-	PrintList(head2);
-	
-	DestroyList(head1);
-	DestroyList(head2);
-	return 0 ; 
-} 
+}

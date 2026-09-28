@@ -36,9 +36,12 @@ void stringAssign(String *s,char *data){
 			s->data[i] = *temp;
 			temp++;
 		} 
+		s->data[len] = '\0';
 	}
-	s->data[len] = '\0';
+	
 }
+//next[i]是表示下标i之前的字串的公共缀长度 为什么不能算上i 
+//因为我们是在kmp中i失配了才利用next i不算在已经匹配的子串中
 int* getNext(String *s){
 	int *next = (int*)malloc(sizeof(int)*s->len);
 	int i = 0;//索引从0开始 
@@ -56,10 +59,10 @@ int* getNext(String *s){
             next[i] = j;
         } 
 		else{
-			j = next[j];//把j往前推 写j--也一样 
+			j = next[j];//把j往前推 
 		}
 	} 
-	return next;//next是公共缀加一 
+	return next;//next是公共缀长度
 }
 
 void printNext(int* next,int len){
@@ -74,6 +77,7 @@ void printString(String *s){
 	}
 	printf("\n");
 }
+//这个版本是下标索引从零开始的
 void kmpMatch(String* master,String *sub,int  *next){
 	int i = 0;
 	int j = 0;
