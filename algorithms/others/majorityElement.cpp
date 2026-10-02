@@ -1,7 +1,5 @@
 #include <iostream>
-#include <algorithm>  // swap
 #include <vector>
-#include <stack>
 using namespace std;
 
 class Solution {
