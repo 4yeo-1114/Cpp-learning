@@ -62,6 +62,7 @@ Node* deleteNode(Node* root, int data) {
         root->right = deleteNode(root->right, data);
     else {
         // 叶子节点或只有一个子节点
+         //这里其实包括了左右都是空节点的情况
         if (root->left == NULL) {
             Node* temp = root->right;
             free(root);
@@ -73,6 +74,8 @@ Node* deleteNode(Node* root, int data) {
         }
 
         // 有两个子节点：找中序后继
+        //中序后继就是新的根节点 但是我们不乱改变树结构 直接把当前根节点的值变成中序后继temp
+        //相应的就得在右子树删除temp 即可递归
         Node* temp = findMin(root->right);
         root->data = temp->data;
         root->right = deleteNode(root->right, temp->data);

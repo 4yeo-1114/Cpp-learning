@@ -21,7 +21,7 @@ void InThreading(BiThrTree p) {
         // 处理当前节点p的左线索
         if (!p->lchild) {       // 左孩子为空，建立左线索（指向前驱）
             p->LTag = 1;
-            p->lchild = pre;
+            p->lchild = pre;I
         } else {
             p->LTag = 0; // 左孩子非空，标记为0
         }
@@ -33,7 +33,7 @@ void InThreading(BiThrTree p) {
         } else {
             pre->RTag = 0; // 前驱右孩子非空，标记为0
         }
-        pre = p;                // 更新pre为当前节点p，作为下一个节点的前驱
+        pre = p;                // 更新pre为当前节点p，作为下一个节点的前驱 在进入右子树线索化前要先把自己线索化好
         
         InThreading(p->rchild); // 递归线索化右子树
     }
@@ -121,7 +121,7 @@ int main() {
     A->data = 'A'; B->data = 'B'; C->data = 'C';
     D->data = 'D'; E->data = 'E'; F->data = 'F';
     
-    // 初始化各节点的孩子和标记
+    // 初始化各节点的孩子和标记a
     A->lchild = B; A->rchild = C; A->LTag = 0; A->RTag = 0;
     B->lchild = D; B->rchild = E; B->LTag = 0; B->RTag = 0;
     C->lchild = NULL; C->rchild = F; C->LTag = 1; C->RTag = 0;
